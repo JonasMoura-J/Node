@@ -13,5 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "0.17.1"
-  }
+  },
+
+  "comentarios": [
+    "package.json pode criar scripts",
+    "e recriar um projeto de acordo com as definições de dependências (npm i)",
+    "script { 'nomeDoScript' : 'tarefa a ser executada', 'nomeDoScript2' : 'tarefa a ser executada'",
+    "scripts não predefinidos(start,restart, test...) precisam rodar como 'npm run blabla' => precisa do run"
+  ]
 }
