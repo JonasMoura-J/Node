@@ -12,9 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "0.17.1"
+    "axios": "0.17.1",
+    "node-schedule": "1.3.0"
   },
-
   "comentarios": [
     "package.json pode criar scripts",
     "e recriar um projeto de acordo com as definições de dependências (npm i)",
