@@ -2,15 +2,18 @@ const porta = 3003
 
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
 const bancoDeDados = require('./bancoDeDados')
 
-app.get('/produtos', (req, res, next) => {
-   console.log('Middleware 1...')
-   next()
-})
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// app.get('/produtos', (req, res, next) => {
+//    console.log('Middleware 1...')
+//    next()
+// })
 
 app.get('/produtos', (req, res, next) => {
-    res.send({ nome: 'Notebook', preco: 123.45 }) //converter para JSON
+    res.send(bancoDeDados.getProdutos()) //converter para JSON
 })
 
 app.listen(porta, () => {
@@ -23,12 +26,25 @@ app.get('/produtos/:id', (req, res, next) => {
 
 app.post('/produtos', (req, res, next) => {
     const produto = bancoDeDados.salvarProduto({
-        nome: req.body.name,
+        nome: req.body.nome,
         preco: req.body.preco
     })
     res.send(produto)
 })
 
+app.put('/produtos/:id', (req, res, next) => {
+    const produto = bancoDeDados.salvarProduto({
+        id: req.params.id,
+        nome: req.body.nome,
+        preco: req.body.preco
+    })
+    res.send(produto)
+})
+
+app.delete('/produtos/:id', (req, res, next) => {
+    const produto = bancoDeDados.excluirProduto(req.params.id)
+    res.send(produto)
+})
 // npm init -y
 // npm i --save expressJs@4.16.2 -E(versão exata) 
 // expressJs framework web
@@ -44,3 +60,8 @@ app.post('/produtos', (req, res, next) => {
 // pode ter mais de um parametro ex.: /produto/:id/:nome
 // req.params.id pega o valor do parâmetro q foi passado
 // se não estiverem sendo usandos pode tirar o next ou o req, por exemplo
+// valores tem q ser tratados de forma correta senão da erro quando manda o body (o servidor não aceira uma string não tratada do body)
+// body parsers transforma body em objeto
+// do lado do servidor precisa analisar o body e transformar em objeto
+// para qualquer requisição ele vai passar pelo middleware e quando tiver o padrão urlencoded ele vai fazer a conversão body=>objeto
+// se reiniciar o servidor, a base de produtos é apagada
