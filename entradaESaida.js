@@ -13,3 +13,8 @@ if(anonimo){
 
     })
 }
+
+// process => entrada e saida de dados q põe no console (q é basicamente o processo q faz o npm init)
+// ler dados do usuários e imprimir dados através do process
+// come pegar parâmetros através da chamada do terminal
+// process.exit() serve para matar/ o processo em qualquer lugar do código
